@@ -82,16 +82,16 @@ public class MileSiteTest {
         ChromeOptions options = new ChromeOptions();
         // options.setHeadless(true);
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver browser = new ChromeDriver();
-        browser.manage().window().maximize();
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        browser.get("https://mile.by");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://mile.by");
 
-        browser.findElement(CATALOGUE_BUTTON).click();
-        browser.findElement(ITEM2_SEARCH).click();
-        String newPage = browser.findElement(ITEM2_CONFIRM).getText();
+        driver.findElement(CATALOGUE_BUTTON).click();
+        driver.findElement(ITEM2_SEARCH).click();
+        String newPage = driver.findElement(ITEM2_CONFIRM).getText();
         assertEquals(newPage, "Спорт и активный отдых", "New page failed to open");
-        browser.quit();
+        driver.quit();
     }
 
     @Test
@@ -100,21 +100,21 @@ public class MileSiteTest {
         ChromeOptions options = new ChromeOptions();
         // options.setHeadless(true);
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver browser = new ChromeDriver();
-        browser.manage().window().maximize();
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        browser.get("https://mile.by");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://mile.by");
 
-        browser.findElement(CATALOGUE_BUTTON).click();
-        browser.findElement(ITEM3_SEARCH).click();
-        browser.findElement(ITEM3_CONFIRM).click();
-        browser.findElement(ITEM3_CHOICE).click();
-        browser.findElement(BUY_CLICK).click();
-        browser.findElement(NAME_ENTRY).sendKeys("Ann");
-        browser.findElement(PHONE_ENTRY).sendKeys("442200000");
-        browser.findElement(BUY_BUTTON).click();
-        boolean isBought = browser.findElement(CONFIRM_MESSAGE).isDisplayed();
+        driver.findElement(CATALOGUE_BUTTON).click();
+        driver.findElement(ITEM3_SEARCH).click();
+        driver.findElement(ITEM3_CONFIRM).click();
+        driver.findElement(ITEM3_CHOICE).click();
+        driver.findElement(BUY_CLICK).click();
+        driver.findElement(NAME_ENTRY).sendKeys("Ann");
+        driver.findElement(PHONE_ENTRY).sendKeys("442200000");
+        driver.findElement(BUY_BUTTON).click();
+        boolean isBought = driver.findElement(CONFIRM_MESSAGE).isDisplayed();
         assertTrue(isBought, "The item failed to be bought");
-        browser.quit();
+        driver.quit();
     }
 }
