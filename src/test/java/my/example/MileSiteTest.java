@@ -28,11 +28,7 @@ public class MileSiteTest {
     private final By ITEM3_CONFIRM = By.xpath("//h2[contains(text(),'Почтовые ящики и декоративные элементы для зданий')]");
     private final By ITEM3_CHOICE = By.xpath("//a[contains(text(),'Крепление флюгера Каменный Замок КФКЗ 001')]");
     private final By BUY_CLICK = By.xpath("//span[contains(text(),'Купить в 1 клик')]");
-    private final By NAME_ENTRY = By.xpath("(//input[@name=\"NAME\"])[3]");
-    private final By PHONE_ENTRY = By.xpath("(//input[@name=\"PHONE\"])[5]");
-    private final By BUY_BUTTON = By.xpath("//button[contains(text(),'Купить')]");
-    private final By CONFIRM_MESSAGE = By.className("quick-order-wrap");
-
+    private final By CONFIRM_MESSAGE = By.xpath("//span[contains(text(),'обработку персональных данных')]");
 
     @Test
     public void searchForItem() {
@@ -110,11 +106,21 @@ public class MileSiteTest {
         driver.findElement(ITEM3_CONFIRM).click();
         driver.findElement(ITEM3_CHOICE).click();
         driver.findElement(BUY_CLICK).click();
-        driver.findElement(NAME_ENTRY).sendKeys("Ann");
-        driver.findElement(PHONE_ENTRY).sendKeys("442200000");
-        driver.findElement(BUY_BUTTON).click();
         boolean isBought = driver.findElement(CONFIRM_MESSAGE).isDisplayed();
         assertTrue(isBought, "The item failed to be bought");
         driver.quit();
+
     }
 }
+    /*
+        private final By NAME_ENTRY = By.xpath("(//input[@name=\"NAME\"])[3]");
+        private final By PHONE_ENTRY = By.xpath("(//input[@name=\"PHONE\"])[5]");
+        private final By BUY_BUTTON = By.xpath("//button[contains(text(),'Купить')]");
+        private final By CONFIRM_MESSAGE2 = By.className("quick-order-wrap");
+
+        driver.findElement(NAME_ENTRY).sendKeys("Ann");
+        driver.findElement(PHONE_ENTRY).sendKeys("442200000");
+        driver.findElement(BUY_BUTTON).click();
+        boolean isBought = driver.findElement(CONFIRM_MESSAGE2).isDisplayed();
+        assertTrue(isBought, "The item failed to be bought");
+        driver.quit();*/
