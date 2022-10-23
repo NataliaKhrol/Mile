@@ -11,13 +11,15 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class MileSiteTest {
+public class MileSiteTest extends BaseTest {
+
+    public static final String BASE_URL = "https://mile.by";
     private final By SEARCH_BUTTON = By.cssSelector("[class=\"header-search\"]");
     private final By SEARCH_CONFIRM = By.cssSelector("[type=\"submit\"]");
     private final By SEARCH_RESULT = By.xpath("//h1[contains(text(),'Результаты по запросу: замок')]");
-    private final By CATALOGUE_BUTTON = By.xpath("//span[contains(text(),'каталог')]");
+    private final By CATALOGUE_BUTTON = By.cssSelector("[class=\"new-but new-catalog\"]");
     private final By ITEM1_SEARCH = By.xpath("//a[contains(text(),'Отделочные материалы')]");
-    private final By ITEM1_CONFIRM = By.xpath("//h2[contains(text(),'Напольные покрытия')]");
+    private final By ITEM1_CONFIRM = By.xpath("//a[contains(text(),'Напольные покрытия')]");
     private final By ITEM1_CHOICE = By.xpath("//h2[contains(text(),'Искусственная трава')]");
     private final By ITEM1_PICKUP = By.cssSelector("[title=\"Искусственная трава Ricco ПП 12 DECO 30 м x 1,33 м\"]");
     private final By ADD_CART = By.xpath("//span[contains(text(),'В корзину')]");
@@ -32,74 +34,47 @@ public class MileSiteTest {
 
     @Test
     public void searchForItem() {
-        // 1. Открыть браузер
-        // 2. Зайти на сайт
-        ChromeOptions options = new ChromeOptions();
-        // options.setHeadless(true);
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver browser = new ChromeDriver();
-        browser.manage().window().maximize();
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        browser.get("https://mile.by");
 
-        browser.findElement(SEARCH_BUTTON).sendKeys("замок");
-        browser.findElement(SEARCH_CONFIRM).click();//div[contains(text(),'7.6')]
-        String result = browser.findElement(SEARCH_RESULT).getText();
-        // System.out.println(result);
+        driver.get(BASE_URL);
+        driver.findElement(SEARCH_BUTTON).sendKeys("замок");
+        driver.findElement(SEARCH_CONFIRM).click();//div[contains(text(),'7.6')]
+        String result = driver.findElement(SEARCH_RESULT).getText();
+      // System.out.println(result);
         assertEquals(result, "Результаты по запросу: замок", "The search wasn't performed");
-        browser.quit();
     }
 
     @Test
     public void chooseItem() {
 
-        ChromeOptions options = new ChromeOptions();
-        // options.setHeadless(true);
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver browser = new ChromeDriver();
-        browser.manage().window().maximize();
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        browser.get("https://mile.by");
+        driver.get(BASE_URL);
 
-        browser.findElement(CATALOGUE_BUTTON).click();
-        browser.findElement(ITEM1_SEARCH).click();
-        browser.findElement(ITEM1_CONFIRM).click();
-        browser.findElement(ITEM1_CHOICE).click();
-        browser.findElement(ITEM1_PICKUP).click();
-        browser.findElement(ADD_CART).click();
-        boolean isOpened = browser.findElement(NOTIFICATION_MESSAGE).isDisplayed();
+        driver.findElement(CATALOGUE_BUTTON).click();
+        driver.findElement(ITEM1_SEARCH).click();
+        driver.findElement(ITEM1_CONFIRM).click();
+        driver.findElement(ITEM1_CHOICE).click();
+        driver.findElement(ITEM1_PICKUP).click();
+        driver.findElement(ADD_CART).click();
+        boolean isOpened = driver.findElement(NOTIFICATION_MESSAGE).isDisplayed();
         assertTrue(isOpened, "The item failed to be added to the Cart");
-        browser.quit();
+
     }
 
     @Test
     public void switchToPage() {
 
-        ChromeOptions options = new ChromeOptions();
-        // options.setHeadless(true);
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://mile.by");
+        driver.get(BASE_URL);
 
         driver.findElement(CATALOGUE_BUTTON).click();
         driver.findElement(ITEM2_SEARCH).click();
         String newPage = driver.findElement(ITEM2_CONFIRM).getText();
         assertEquals(newPage, "Спорт и активный отдых", "New page failed to open");
-        driver.quit();
+
     }
 
     @Test
     public void buyItem() {
 
-        ChromeOptions options = new ChromeOptions();
-        // options.setHeadless(true);
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://mile.by");
+        driver.get(BASE_URL);
 
         driver.findElement(CATALOGUE_BUTTON).click();
         driver.findElement(ITEM3_SEARCH).click();
@@ -108,7 +83,6 @@ public class MileSiteTest {
         driver.findElement(BUY_CLICK).click();
         boolean isBought = driver.findElement(CONFIRM_MESSAGE).isDisplayed();
         assertTrue(isBought, "The item failed to be bought");
-        driver.quit();
 
     }
 }
