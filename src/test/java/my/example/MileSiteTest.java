@@ -86,15 +86,4 @@ public class MileSiteTest extends BaseTest {
 
     }
 }
-    /*
-        private final By NAME_ENTRY = By.xpath("(//input[@name=\"NAME\"])[3]");
-        private final By PHONE_ENTRY = By.xpath("(//input[@name=\"PHONE\"])[5]");
-        private final By BUY_BUTTON = By.xpath("//button[contains(text(),'Купить')]");
-        private final By CONFIRM_MESSAGE2 = By.className("quick-order-wrap");
 
-        driver.findElement(NAME_ENTRY).sendKeys("Ann");
-        driver.findElement(PHONE_ENTRY).sendKeys("442200000");
-        driver.findElement(BUY_BUTTON).click();
-        boolean isBought = driver.findElement(CONFIRM_MESSAGE2).isDisplayed();
-        assertTrue(isBought, "The item failed to be bought");
-        driver.quit();*/
