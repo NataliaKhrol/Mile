@@ -18,22 +18,20 @@ public class BaseTest {
     @Parameters({"browser"})
     @BeforeMethod(description = "Opening the browser")
     // 1. Открыть браузер
-
     public void setup(@Optional("chrome") String browser, ITestContext testContext) {
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-           // options.setHeadless(true);
+             options.setHeadless(true);
             driver = new ChromeDriver(options);
         }
         testContext.setAttribute("driver", driver);
-
     }
 
     @AfterMethod(alwaysRun = true)
     public void close() {
         if (driver != null) {
-          //  driver.quit();
+            driver.quit();
         }
     }
 }

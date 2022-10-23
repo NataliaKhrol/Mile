@@ -25,10 +25,10 @@ public class MileSiteTest extends BaseTest {
     private final By ADD_CART = By.xpath("//span[contains(text(),'В корзину')]");
     private final By NOTIFICATION_MESSAGE = By.xpath("//div[contains(text(),'Товар добавлен в корзину')]");
     private final By ITEM2_SEARCH = By.xpath("//a[contains(text(),'Спорт и активный отдых')]");
-    private final By ITEM2_CONFIRM = By.xpath("//h1[contains(text(),'Спорт и активный отдых')]");
-    private final By ITEM3_SEARCH = By.xpath("//a[contains(text(),'Скобяные изделия')]");
-    private final By ITEM3_CONFIRM = By.xpath("//h2[contains(text(),'Почтовые ящики и декоративные элементы для зданий')]");
-    private final By ITEM3_CHOICE = By.xpath("//a[contains(text(),'Крепление флюгера Каменный Замок КФКЗ 001')]");
+    private final By ITEM2_CONFIRM = By.xpath("//a[contains(text(),'Самокаты, велосипеды, скейтборды')]");
+    private final By ITEM3_SEARCH = By.xpath("(//a[contains(text(),'Декор')])[3]");
+    private final By ITEM3_CHOICE = By.xpath("//a[contains(text(),'Шторы')]");
+    private final By ITEM3_CONFIRM = By.xpath("//a[contains(text(),'Жалюзи горизонтальные СГЖМ-300/13 48/160')]");
     private final By BUY_CLICK = By.xpath("//span[contains(text(),'Купить в 1 клик')]");
     private final By CONFIRM_MESSAGE = By.xpath("//span[contains(text(),'обработку персональных данных')]");
 
@@ -39,7 +39,6 @@ public class MileSiteTest extends BaseTest {
         driver.findElement(SEARCH_BUTTON).sendKeys("замок");
         driver.findElement(SEARCH_CONFIRM).click();//div[contains(text(),'7.6')]
         String result = driver.findElement(SEARCH_RESULT).getText();
-      // System.out.println(result);
         assertEquals(result, "Результаты по запросу: замок", "The search wasn't performed");
     }
 
@@ -47,7 +46,6 @@ public class MileSiteTest extends BaseTest {
     public void chooseItem() {
 
         driver.get(BASE_URL);
-
         driver.findElement(CATALOGUE_BUTTON).click();
         driver.findElement(ITEM1_SEARCH).click();
         driver.findElement(ITEM1_CONFIRM).click();
@@ -63,27 +61,23 @@ public class MileSiteTest extends BaseTest {
     public void switchToPage() {
 
         driver.get(BASE_URL);
-
         driver.findElement(CATALOGUE_BUTTON).click();
         driver.findElement(ITEM2_SEARCH).click();
         String newPage = driver.findElement(ITEM2_CONFIRM).getText();
-        assertEquals(newPage, "Спорт и активный отдых", "New page failed to open");
-
+        assertEquals(newPage, "Самокаты, велосипеды, скейтборды", "New page failed to open");
     }
 
     @Test
     public void buyItem() {
 
         driver.get(BASE_URL);
-
         driver.findElement(CATALOGUE_BUTTON).click();
         driver.findElement(ITEM3_SEARCH).click();
-        driver.findElement(ITEM3_CONFIRM).click();
         driver.findElement(ITEM3_CHOICE).click();
+        driver.findElement(ITEM3_CONFIRM).click();
         driver.findElement(BUY_CLICK).click();
         boolean isBought = driver.findElement(CONFIRM_MESSAGE).isDisplayed();
         assertTrue(isBought, "The item failed to be bought");
-
     }
 }
 
