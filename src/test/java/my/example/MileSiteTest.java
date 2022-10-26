@@ -2,16 +2,21 @@ package my.example;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MileSiteTest extends BaseTest {
+
 
     public static final String BASE_URL = "https://mile.by";
     private final By SEARCH_BUTTON = By.cssSelector("[class=\"header-search\"]");
@@ -78,6 +83,20 @@ public class MileSiteTest extends BaseTest {
         driver.findElement(BUY_CLICK).click();
         boolean isBought = driver.findElement(CONFIRM_MESSAGE).isDisplayed();
         assertTrue(isBought, "The item failed to be bought");
+    }
+
+    @Test
+    public void checkTotal() {
+
+        driver.get(BASE_URL + "/vendors/zanussi/");
+        driver.findElement(By.cssSelector("[title=\"Электрическая плита Zanussi ZCV9540H1W\"]")).click();
+        driver.findElement(By.cssSelector("[class=\"dec plus\"]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'В корзину')]")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Товар добавлен в корзину')]")));
+        driver.findElement(By.xpath("//a[contains(text(),'Перейти в корзину')]")).click();
+        String totalCost = driver.findElement(By.cssSelector("[class=\"total-price\"]")).getText();
+        assertEquals(totalCost, "2198 руб.", "Total calculated incorrectly");
     }
 }
 
