@@ -1,5 +1,3 @@
-package my.example;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,8 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     WebDriver driver;
@@ -22,7 +18,7 @@ public class BaseTest {
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-           //  options.setHeadless(true);
+            //  options.setHeadless(true);
             driver = new ChromeDriver(options);
         }
         testContext.setAttribute("driver", driver);
