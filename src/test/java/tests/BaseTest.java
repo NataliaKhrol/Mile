@@ -26,7 +26,7 @@ public class BaseTest {
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            //  options.setHeadless(true);
+              options.setHeadless(true);
             driver = new ChromeDriver(options);
         }
         testContext.setAttribute("driver", driver);
@@ -35,10 +35,10 @@ public class BaseTest {
         cartPage = new CartPage(driver);
     }
 
-    @AfterMethod(alwaysRun = true, description = "Closing browser")
+    @AfterMethod(alwaysRun = true, description = "Closing the browser")
     public void close() {
         if (driver != null) {
-           // driver.quit();
+           driver.quit();
         }
     }
 }

@@ -1,6 +1,7 @@
 package pages;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +31,7 @@ public class BasePage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize(); //открывает браузер в полном окне
     }
+    @Step("Opening the login page")
     public BasePage open(){
         driver.get(BASE_URL);
         return this;

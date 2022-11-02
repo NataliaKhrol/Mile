@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 public class MileTest extends BaseTest {
 
-    @Test
+    @Test(description = "checking the Search Field")
     public void searchForItem() {
 
         new BasePage(driver).open();
@@ -23,7 +23,7 @@ public class MileTest extends BaseTest {
         assertEquals(mainPage.checkResult(), "Результаты по запросу: замок", "The search wasn't performed");
     }
 
-    @Test
+    @Test(description = "checking the redirection to another page")
     public void switchToPage() {
 
         basePage.open();
@@ -31,7 +31,7 @@ public class MileTest extends BaseTest {
         assertEquals(mainPage.checkSwitchResult(), "Самокаты, велосипеды, скейтборды", "New page failed to open");
     }
 
-    @Test
+    @Test(description = "Adding goods to the cart")
     public void addToCart() {
 
         basePage.open();
@@ -40,7 +40,7 @@ public class MileTest extends BaseTest {
         assertTrue(cartPage.checkOpen(), "The item failed to be added to the Cart");
     }
 
-    @Test
+    @Test(description = "Checking the validity of the calculations")
     public void checkTotal() {
 
         cartPage.open()
@@ -50,7 +50,7 @@ public class MileTest extends BaseTest {
         assertEquals(cartPage.checkTotal(), "2198 руб.", "Total calculated incorrectly");
     }
 
-    @Test
+    @Test(description = "Checkout clearance")
     public void buyItem() {
 
         cartPage.open()
